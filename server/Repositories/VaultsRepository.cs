@@ -35,7 +35,20 @@ public class VaultsRepository
 
   internal Vault GetVaultById(int vaultId)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    SELECT
+    vaults.*,
+    accounts.*
+    FROM vaults
+    INNER JOIN accounts on accounts.id = vaults.creator_id
+    WHERE vaults.id = @vaultId;";
+
+    Vault foundVault = _db.Query(sql, (Vault vault, Profile account) =>
+    {
+      vault.Creator = account;
+      return vault;
+    }, new { vaultId }).SingleOrDefault();
+    return foundVault;
   }
 
   internal List<Vault> GetVaults()
