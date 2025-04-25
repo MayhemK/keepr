@@ -25,6 +25,7 @@ public class VaultsController : ControllerBase
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       vaultData.CreatorId = userInfo.Id;
+      //NOTE add creatorid to table
       Vault vault = _vaultsService.CreateVault(vaultData);
     }
     catch (Exception exception)
@@ -39,6 +40,20 @@ public class VaultsController : ControllerBase
     try
     {
       List<Vault> vault = _vaultsService.GetVaults();
+      return Ok(vault);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [HttpGet("{vaultId}")]
+  public ActionResult<Vault> GetVaultById(int vaultId)
+  {
+    try
+    {
+      Vault vault = _vaultsService.GetVaultById(vaultId);
       return Ok(vault);
     }
     catch (Exception exception)

@@ -1,4 +1,5 @@
 
+
 namespace keepr.Services;
 
 public class VaultsService
@@ -18,5 +19,16 @@ public class VaultsService
   {
     List<Vault> vaults = _repository.GetVaults();
     return vaults;
+  }
+
+  internal Vault GetVaultById(int vaultId)
+  {
+    Vault vault = _repository.GetVaultById(vaultId);
+
+    if (vault == null)
+    {
+      throw new Exception("No Vault Found With this Id");
+    }
+    return vault;
   }
 }

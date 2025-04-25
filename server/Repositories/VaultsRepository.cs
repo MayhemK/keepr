@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Repositories;
 
 public class VaultsRepository
@@ -30,6 +31,11 @@ public class VaultsRepository
       return vault;
     }, vaultData).SingleOrDefault();
     return createdVault;
+  }
+
+  internal Vault GetVaultById(int vaultId)
+  {
+    throw new NotImplementedException();
   }
 
   internal List<Vault> GetVaults()
