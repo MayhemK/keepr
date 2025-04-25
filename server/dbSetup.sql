@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS accounts(
   cover_img VARCHAR(255) COMMENT 'User Cover Image'
 ) default charset utf8mb4 COMMENT '';
 
-ALTER TABLE accounts
-ADD cover_img VARCHAR(255) COMMENT 'User Cover Image'
+ALTER TABLE  vaults
+ADD creator_id VARCHAR(255) NOT NULL
 
 CREATE TABLE vaults(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

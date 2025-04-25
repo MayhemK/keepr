@@ -9,4 +9,5 @@ public class Vault : RepoItems<int>
   [Url, MaxLength(1000)] public string Img { get; set; }
   public bool isPrivate { get; set; }
   public Account Creator { get; set; }
+  public CreatorId { get; set; }
 }
