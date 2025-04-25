@@ -4,5 +4,34 @@ CREATE TABLE IF NOT EXISTS accounts(
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   name VARCHAR(255) COMMENT 'User Name',
   email VARCHAR(255) UNIQUE COMMENT 'User Email',
-  picture VARCHAR(255) COMMENT 'User Picture'
+  picture VARCHAR(255) COMMENT 'User Picture',
+  cover_img VARCHAR(255) COMMENT 'User Cover Image'
 ) default charset utf8mb4 COMMENT '';
+
+ALTER TABLE accounts
+ADD cover_img VARCHAR(255) COMMENT 'User Cover Image'
+
+CREATE TABLE vaults(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name TINYTEXT NOT NULL,
+  description TEXT NOT NULL,
+  img TEXT NOT NULL,
+  isPrivate BOOLEAN NOT NULL DEFAULT false,
+  creator_id VARCHAR(255) NOT NULL,
+  FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
+)
+
+
+CREATE TABLE keeps(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name TINYTEXT NOT NULL, 
+  description TEXT NOT NULL,
+  img TEXT NOT NULL,
+  views TINYINT UNSIGNED NOT NULL,
+  creator_id VARCHAR(255) NOT NULL,
+  vault_id INT NOT NULL,
+  FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE,
+  FOREIGN KEY (vault_id) REFERENCES vaults(id) ON DELETE CASCADE
+)
+
+
