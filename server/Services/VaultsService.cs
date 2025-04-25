@@ -1,3 +1,4 @@
+
 namespace keepr.Services;
 
 public class VaultsService
@@ -11,5 +12,11 @@ public class VaultsService
   {
     Vault vault = _repository.CreateVault(vaultData);
     return vault;
+  }
+
+  internal List<Vault> GetVaults()
+  {
+    List<Vault> vaults = _repository.GetVaults();
+    return vaults;
   }
 }

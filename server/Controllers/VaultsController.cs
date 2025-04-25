@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace keepr.Controllers;
+
 
 [ApiController]
 [Route("api/[controller]")]
@@ -23,6 +26,20 @@ public class VaultsController : ControllerBase
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       vaultData.CreatorId = userInfo.Id;
       Vault vault = _vaultsService.CreateVault(vaultData);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [HttpGet]
+  public ActionResult<List<Vault>> GetAllVaults()
+  {
+    try
+    {
+      List<Vault> vault = _vaultsService.GetVaults();
+      return Ok(vault);
     }
     catch (Exception exception)
     {
