@@ -16,7 +16,7 @@ CREATE TABLE vaults(
   name TINYTEXT NOT NULL,
   description TEXT NOT NULL,
   img TEXT NOT NULL,
-  isPrivate BOOLEAN NOT NULL DEFAULT false,
+  is_private BOOLEAN NOT NULL DEFAULT false,
   creator_id VARCHAR(255) NOT NULL,
   FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
 )
