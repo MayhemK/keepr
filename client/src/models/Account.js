@@ -1,18 +1,18 @@
-export class Account {
-  /**
-   * @typedef AccountData
-   * @property {string} id
-   * @property {string} email
-   * @property {string} name
-   * @property {string} picture
-   * 
-   * @param {AccountData} data
-   */
+import { DatabaseItem } from "./DatabaseItem.js"
+
+export class Profile extends DatabaseItem {
   constructor(data) {
-    this.id = data.id
-    this.email = data.email
+    super(data)
     this.name = data.name
     this.picture = data.picture
+  }
+}
+
+export class Account extends Profile {
+  constructor(data) {
+    super(data)
+    this.id = data.id
+    this.email = data.email
     // TODO add additional properties if needed
   }
 }
