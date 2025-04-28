@@ -18,3 +18,13 @@ main {
   justify-content: start;
   align-items: end;
 }
+
+.metal-font {
+  font-family: metal;
+  font-weight: 50;
+}
+
+@font-face {
+  font-family: metal;
+  src: url('../fonts/MetalMacabre.ttf');
+}
