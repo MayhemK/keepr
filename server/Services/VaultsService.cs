@@ -32,6 +32,18 @@ public class VaultsService
     return vault;
   }
 
+  internal Vault GetVaultById(int vaultId, Profile userInfo)
+  {
+    Vault vault = _repository.GetVaultById(vaultId);
+
+    if (vault.IsPrivate == true && vault.CreatorId != userInfo?.Id)
+    {
+      throw new Exception("Invalid Id");
+    }
+    return vault;
+  }
+
+
   internal Vault Update(int vaultId, Account userInfo, Vault vaultUpdateData)
   {
     Vault vault = GetVaultById(vaultId);
