@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace keepr.Services;
 
@@ -30,5 +30,32 @@ public class VaultsService
       throw new Exception("No Vault Found With this Id");
     }
     return vault;
+  }
+
+  internal Vault Update(int vaultId, Account userInfo, Vault vaultUpdateData)
+  {
+    Vault vault = GetVaultById(vaultId);
+    if (vault.CreatorId != userInfo.Id)
+    {
+      throw new Exception($"You can not update another user's Vault!");
+    }
+
+    vault.Name = vaultUpdateData.Name ?? vault.Name;
+    vault.Description = vaultUpdateData.Description ?? vault.Description;
+    vault.IsPrivate = vaultUpdateData.IsPrivate ?? vault.IsPrivate;
+
+    _repository.Update(vault);
+    return vault;
+  }
+
+  internal string Delete(int vaultId, Account userInfo)
+  {
+    Vault vault = GetVaultById(vaultId);
+    if (vault.CreatorId != userInfo.Id)
+    {
+      throw new Exception($"You can't delete another user's Vault!");
+    }
+    _repository.Delete(vaultId);
+    return vault.Name + " had been deleted!";
   }
 }

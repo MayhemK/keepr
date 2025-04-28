@@ -1,6 +1,8 @@
 
 
 
+
+
 namespace keepr.Repositories;
 
 public class VaultsRepository
@@ -32,6 +34,7 @@ public class VaultsRepository
     }, vaultData).SingleOrDefault();
     return createdVault;
   }
+
 
   internal Vault GetVaultById(int vaultId)
   {
@@ -66,5 +69,27 @@ public class VaultsRepository
       return vault;
     }).ToList();
     return vaults;
+  }
+
+  internal void Update(Vault vaultUpdateData)
+  {
+    string sql = @"
+UPDATE vaults
+SET
+name = @Name,
+description = @Description,
+is_private = @IsPrivate
+WHERE id = @Id LIMIT 1;";
+    int rowsAffected = _db.Execute(sql, vaultUpdateData);
+  }
+
+  public void Delete(int vaultId)
+  {
+    string sql = "DELETE FROM vaults WHERE id = @id LIMIT 1;";
+    int rowsAffected = _db.Execute(sql, new { vaultId });
+    // if (rowsAffected != 1)
+    // {
+    //   throw new Exception(rowsAffected + " ROWS WERE DELETED AND THAT IS NOT GOOD");
+    // }
   }
 }
