@@ -25,8 +25,8 @@ public class VaultsController : ControllerBase
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       vaultData.CreatorId = userInfo.Id;
-      //NOTE add creatorid to table
       Vault vault = _vaultsService.CreateVault(vaultData);
+      return Ok(vault);
     }
     catch (Exception exception)
     {

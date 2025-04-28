@@ -25,7 +25,7 @@ public class VaultsRepository
     INNER JOIN accounts ON accounts.id = vaults.creator_id
     WHERE vaults.id = LAST_INSERT_ID();";
 
-    Vault createdVault = _db.Query(sql, (Vault vault, Account account) =>
+    Vault createdVault = _db.Query(sql, (Vault vault, Profile account) =>
     {
       vault.Creator = account;
       return vault;
