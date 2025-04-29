@@ -44,7 +44,7 @@ public class KeepsService
 
     keep.Name = keepUpdateData.Name ?? keep.Name;
     keep.Description = keepUpdateData.Description ?? keep.Description;
-    keep.Img = keepUpdateData.Description ?? keep.Img;
+    keep.Img = keepUpdateData.Img ?? keep.Img;
 
     _repository.Update(keep);
     return keep;

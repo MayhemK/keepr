@@ -77,11 +77,20 @@ public class KeepsRepository
     description = @Description
     img = @Img
     WHERE id = @Id LIMIT 1;";
+    int rowsAffected = _db.Execute(sql, keepUpdateData);
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " Rows were updated, Only one was intended");
+    }
   }
 
   internal void Delete(int keepId)
   {
     string sql = "DELETE FROM keeps WHERE id = @id LIMIT 1;";
-
+    int rowsAffected = _db.Execute(sql, new { keepId });
+    // if (rowsAffected != 1)
+    // {
+    //   throw new Exception(rowsAffected + " Rows were deleted, Only one was intended");
+    // }
   }
 }

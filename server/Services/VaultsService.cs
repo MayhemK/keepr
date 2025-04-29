@@ -44,13 +44,12 @@ public class VaultsService
     return vault;
   }
 
-
   internal Vault Update(int vaultId, Profile userInfo, Vault vaultUpdateData)
   {
     Vault vault = GetVaultById(vaultId);
     if (vault.CreatorId != userInfo.Id)
     {
-      throw new Exception($"You can not update another user's Vault!");
+      throw new Exception("You can not update another user's Vault!");
     }
 
     vault.Name = vaultUpdateData.Name ?? vault.Name;
