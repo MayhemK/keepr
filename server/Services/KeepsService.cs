@@ -33,4 +33,31 @@ public class KeepsService
     }
     return keep;
   }
+
+  internal Keep Update(int keepId, Profile userInfo, Keep keepUpdateData)
+  {
+    Keep keep = GetById(keepId);
+    if (keep.CreatorId != userInfo.Id)
+    {
+      throw new Exception("You are not allowed to Update another user's Keep!");
+    }
+
+    keep.Name = keepUpdateData.Name ?? keep.Name;
+    keep.Description = keepUpdateData.Description ?? keep.Description;
+    keep.Img = keepUpdateData.Description ?? keep.Img;
+
+    _repository.Update(keep);
+    return keep;
+  }
+
+  internal string Delete(int keepId, Profile userInfo)
+  {
+    Keep keep = GetById(keepId);
+    if (keep.CreatorId != userInfo.Id)
+    {
+      throw new Exception("You are not allowed to Delete another user's Keep!");
+    }
+    _repository.Delete(keepId);
+    return keep.Name + " had been deleted!";
+  }
 }

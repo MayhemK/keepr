@@ -1,5 +1,8 @@
 
 
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace keepr.Repositories;
 
 public class KeepsRepository
@@ -63,5 +66,22 @@ public class KeepsRepository
       return keep;
     }, new { keepId }).SingleOrDefault();
     return foundKeep;
+  }
+
+  internal void Update(Keep keepUpdateData)
+  {
+    string sql = @"
+    UPDATE keeps
+    SET
+    name = @Name
+    description = @Description
+    img = @Img
+    WHERE id = @Id LIMIT 1;";
+  }
+
+  internal void Delete(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @id LIMIT 1;";
+
   }
 }
