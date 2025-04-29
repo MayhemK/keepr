@@ -1,4 +1,5 @@
 
+
 namespace keepr.Repositories;
 
 public class VaultKeepersRepository
@@ -20,5 +21,21 @@ public class VaultKeepersRepository
 
     VaultKeeps vaultKeeps = _db.Query<VaultKeeps>(sql, vaultKeeperData).SingleOrDefault();
     return vaultKeeps;
+  }
+
+  internal List<VaultKeepsProfile> GetVaultKeepsProfileByVaultId(int vaultId)
+  {
+    string sql = @"
+    SELECT
+    vaultkeep.*,
+    accounts.*
+    FROM vaultkeep
+    INNER JOIN accounts ON accounts.id = vaultkeep.account_id
+    WHERE vaultkeep.vault_id = @vaultId;";
+
+    List<VaultKeepsProfile> vaultKeepsProfiles = _db.Query(sql, (VaultKeeps vaultkeeps, VaultKeepsProfile account) =>
+    {
+
+    })
   }
 }

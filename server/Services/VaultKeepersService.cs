@@ -1,4 +1,5 @@
 
+
 namespace keepr.Services;
 
 public class VaultKeepersService
@@ -13,5 +14,11 @@ public class VaultKeepersService
   {
     VaultKeeps vaultKeeps = _repository.CreateVK(vaultKeeperData);
     return vaultKeeps;
+  }
+
+  internal List<VaultKeepsProfile> GetVaultKeepsProfileByVaultId(int vaultId)
+  {
+    List<VaultKeepsProfile> vaultKeepsProfiles = _repository.GetVaultKeepsProfileByVaultId(vaultId);
+    return vaultKeepsProfiles;
   }
 }
