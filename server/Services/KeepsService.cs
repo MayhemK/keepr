@@ -11,7 +11,7 @@ public class KeepsService
   private readonly KeepsRepository _repository;
   private readonly VaultsService _vaultsService;
 
-  internal Keep Create(Keep keepData, Account userInfo)
+  internal Keep Create(Keep keepData, Profile userInfo)
   {
     Vault vault = _vaultsService.GetVaultById(keepData.VaultId, userInfo);
     Keep keep = _repository.Create(keepData);
