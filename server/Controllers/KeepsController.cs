@@ -20,7 +20,7 @@ public class KeepsController : ControllerBase
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       keepData.CreatorId = userInfo.Id;
-      Keep keep = _keepsService.Create(keepData, userInfo);
+      Keep keep = _keepsService.Create(keepData);
       return Ok(keep);
     }
     catch (Exception exception)

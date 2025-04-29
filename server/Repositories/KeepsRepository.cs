@@ -2,16 +2,16 @@ namespace keepr.Repositories;
 
 public class KeepsRepository
 {
-  private readonly IDbConnection _db;
   public KeepsRepository(IDbConnection db)
   {
     _db = db;
   }
+  private readonly IDbConnection _db;
   internal Keep Create(Keep keepData)
   {
     string sql = @"
-    INSERT INTO keeps(name, description, img, creator_id, vault_id)
-    VALUES(@Name, @Description, @Img, @CreatorId, @VaultId);
+    INSERT INTO keeps(name, description, img, creator_id)
+    VALUES(@Name, @Description, @Img, @CreatorId);
 
     SELECT
     keeps.*,
