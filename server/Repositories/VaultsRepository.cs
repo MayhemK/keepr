@@ -68,12 +68,12 @@ public class VaultsRepository
   internal void Update(Vault vaultUpdateData)
   {
     string sql = @"
-UPDATE vaults
-SET
-name = @Name,
-description = @Description,
-is_private = @IsPrivate
-WHERE id = @Id LIMIT 1;";
+    UPDATE vaults
+    SET
+    name = @Name,
+    description = @Description,
+    is_private = @IsPrivate
+    WHERE id = @Id LIMIT 1;";
     int rowsAffected = _db.Execute(sql, vaultUpdateData);
     if (rowsAffected != 1)
     {

@@ -73,8 +73,8 @@ public class KeepsRepository
     string sql = @"
     UPDATE keeps
     SET
-    name = @Name
-    description = @Description
+    name = @Name,
+    description = @Description,
     img = @Img
     WHERE id = @Id LIMIT 1;";
     int rowsAffected = _db.Execute(sql, keepUpdateData);
