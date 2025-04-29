@@ -1,14 +1,8 @@
-
-
-
-
-
 namespace keepr.Repositories;
 
 public class VaultsRepository
 {
   private readonly IDbConnection _db;
-
   public VaultsRepository(IDbConnection db)
   {
     _db = db;
@@ -74,13 +68,17 @@ public class VaultsRepository
   internal void Update(Vault vaultUpdateData)
   {
     string sql = @"
-UPDATE vaults
-SET
-name = @Name,
-description = @Description,
-is_private = @IsPrivate
-WHERE id = @Id LIMIT 1;";
+    UPDATE vaults
+    SET
+    name = @Name,
+    description = @Description,
+    is_private = @IsPrivate
+    WHERE id = @Id LIMIT 1;";
     int rowsAffected = _db.Execute(sql, vaultUpdateData);
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " Rows were updated, Only one was intended");
+    }
   }
 
   public void Delete(int vaultId)
@@ -89,7 +87,7 @@ WHERE id = @Id LIMIT 1;";
     int rowsAffected = _db.Execute(sql, new { vaultId });
     // if (rowsAffected != 1)
     // {
-    //   throw new Exception(rowsAffected + " ROWS WERE DELETED AND THAT IS NOT GOOD");
+    //   throw new Exception(rowsAffected + " Rows were deleted, Only one was intended");
     // }
   }
 }
