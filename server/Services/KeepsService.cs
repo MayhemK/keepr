@@ -29,7 +29,7 @@ public class KeepsService
 
     if (keep == null)
     {
-      throw new Exception("Invalid ID");
+      throw new Exception("Invalid Keep ID");
     }
     return keep;
   }
