@@ -7,9 +7,9 @@ namespace keepr.Controllers;
 [Route("api/[controller]")]
 public class VaultsController : ControllerBase
 {
-  public VaultsController(VaultsService vaultService, Auth0Provider auth0Provider)
+  public VaultsController(VaultsService vaultsService, Auth0Provider auth0Provider)
   {
-    _vaultsService = vaultService;
+    _vaultsService = vaultsService;
     _auth0Provider = auth0Provider;
   }
 
