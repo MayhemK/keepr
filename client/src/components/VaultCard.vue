@@ -8,23 +8,24 @@ defineProps({
 
 
 <template>
+
   <div class="cards">
     <div class="img-cont">
       <img :src="vault.img" :alt="`A picture of the ${vault.name} vault`" class="vault-img rounded-3">
       <span class="metal-font overlap">{{ vault.name }}</span>
     </div>
   </div>
-  <div>
+  <!-- <div>
     <div class="text-center">
       <p class="card-body border rounded-4">{{ vault.description }}</p>
     </div>
-  </div>
+  </div> -->
 </template>
 
 
 <style lang="scss" scoped>
 .vault-img {
-  display: block;
+  // display: block;
   width: 100%;
   height: auto;
 }
@@ -42,7 +43,7 @@ defineProps({
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
   z-index: 1;
 }
