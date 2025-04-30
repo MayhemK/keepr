@@ -35,7 +35,10 @@ public class VaultKeepersRepository
 
     List<VaultKeepsProfile> vaultKeepsProfiles = _db.Query(sql, (VaultKeeps vaultkeeps, VaultKeepsProfile account) =>
     {
-
-    })
+      account.VaultId = vaultkeeps.VaultId;
+      account.VaultKeepsId = vaultkeeps.Id;
+      return account;
+    }, new { vaultId }).ToList();
+    return vaultKeepsProfiles;
   }
 }

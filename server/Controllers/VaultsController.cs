@@ -96,7 +96,7 @@ public class VaultsController : ControllerBase
     }
   }
 
-  [HttpGet("{vaultId}/vaultkeeps")]
+  [HttpGet("{vaultId}/keeps")]
   public ActionResult<List<VaultKeepsProfile>> GetVaultKeepsProfileByVaultId(int vaultId)
   {
     try
