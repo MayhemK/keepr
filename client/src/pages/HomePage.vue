@@ -1,21 +1,22 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-import { vaultsService } from '@/services/VaultsService.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
-import VaultCard from '@/components/VaultCard.vue';
-import { Vault } from '@/models/Vault.js';
+import { computed, onMounted, ref } from 'vue';
+import KeepCard from '@/components/KeepCard.vue';
+import { keepsService } from '@/services/KeepsService.js';
+import KeepModal from '@/components/KeepModal.vue';
+import { logger } from '@/utils/Logger.js';
 
-const vaults = computed(() => AppState.vaults)
+const keeps = computed(() => AppState.keeps)
 
 onMounted(() => {
-  getAllVaults()
+  getAllKeeps()
 })
 
 
-async function getAllVaults() {
+async function getAllKeeps() {
   try {
-    await vaultsService.getAllVaults()
+    await keepsService.getAllKeeps()
   }
   catch (error) {
     Pop.error(error);
@@ -23,36 +24,38 @@ async function getAllVaults() {
 }
 
 
+
 </script>
 
 <template>
   <section class="container">
-    <div class="row">
-      <div v-for="vault in vaults" :key="vault.id" class="col-md-3" type="button" data-bs-toggle="modal"
-        data-bs-target="#vaultModal">
-        <VaultCard :vault="vault" />
+    <div class="masonry-row">
+      <div v-for="keep in keeps" :key="keep.id" class="masonry-item">
+        <KeepCard :keep="keep" />
       </div>
     </div>
   </section>
-  <section>
-    <div class="modal fade" id="vaultModal" tabindex="-1" aria-labelledby="vaultModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="metal-font fs-4" id="vaultModalLabel">Vault Name</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            vault description
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
+
+  <KeepModal />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.masonry-row {
+  column-count: 4;
+  column-gap: 15px;
+  padding: 0 15px;
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 15px;
+  break-inside: avoid;
+
+}
+</style>
