@@ -10,5 +10,6 @@ export class Vault extends DatabaseItem {
     this.isPrivate = data.isPrivate
     this.creatorId = data.creatorId
     this.creator = new Profile(data.creator)
+
   }
 }

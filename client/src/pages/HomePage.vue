@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
+import VaultCard from '@/components/VaultCard.vue';
 
 const vaults = computed(() => AppState.vaults)
 
@@ -22,19 +23,15 @@ async function getAllVaults() {
 </script>
 
 <template>
-  <p>HI</p>
   <section class="container">
     <div class="row">
-      <div class="col-3">
-        <div class="card">
-          <p>IMAGE</p>
-          <div class="card-body">
-            <p>Inner text</p>
-          </div>
-        </div>
+      <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
+        <VaultCard :vault="vault" />
       </div>
     </div>
   </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>
