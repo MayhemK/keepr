@@ -1,5 +1,7 @@
 
 
+
+
 namespace keepr.Repositories;
 
 public class VaultKeepersRepository
@@ -17,7 +19,7 @@ public class VaultKeepersRepository
     vaultKeep(creator_id, vault_id, keep_id)
     VALUES (@CreatorId, @VaultId, @KeepId);
     
-    SELECT * FROM vaultKeeps WHERE id = LAST_INSERT_ID();";
+    SELECT * FROM vaultKeep WHERE id = LAST_INSERT_ID();";
 
     VaultKeeps vaultKeeps = _db.Query<VaultKeeps>(sql, vaultKeeperData).SingleOrDefault();
     return vaultKeeps;
@@ -40,5 +42,23 @@ public class VaultKeepersRepository
       return account;
     }, new { vaultId }).ToList();
     return vaultKeepsProfiles;
+  }
+
+  internal void DeleteVaultKeeps(int vaultKeepsId)
+  {
+    string sql = "DELETE FROM vaultKeep WHERE id = @vaultKeepsId LIMIT 1;";
+    int rowsAffected = _db.Execute(sql, new { vaultKeepsId });
+    // if (rowsAffected != 1)
+    // {
+    //   throw new Exception(rowsAffected + " Rows were deleted, Only one was intended");
+    // }
+  }
+
+  internal VaultKeeps GetVaultKeepsById(int vaultKeepsId)
+  {
+    string sql = "SELECT * FROM vaultKeep WHERE id = @vaultKeepsId;";
+
+    VaultKeeps vaultKeeps = _db.Query<VaultKeeps>(sql, new { vaultKeepsId }).SingleOrDefault();
+    return vaultKeeps;
   }
 }

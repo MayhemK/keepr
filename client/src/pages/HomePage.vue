@@ -4,7 +4,7 @@ import { vaultsService } from '@/services/VaultsService.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 
-const vaults = computed(() => AppState.vaults)
+// const vaults = computed(() => AppState.vaults)
 
 onMounted(() => {
   getAllVaults()
