@@ -64,7 +64,7 @@ function setActiveKeep() {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  color: orange;
+  color: #ffffff;
 
   padding: 5px 10px;
   font-size: 1.2rem;
