@@ -14,7 +14,7 @@ const keep = computed(() => AppState.activeKeep)
 
 <template>
   <div class="modal fade inter-font" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-md-down">
       <div v-if="keep" class="modal-content">
         <section class="container">
           <div class="row">
@@ -22,7 +22,8 @@ const keep = computed(() => AppState.activeKeep)
               <img :src="keep.img" :alt="keep.name + 'image'">
             </div>
             <div class="col-md-6" id="info">
-              <!-- <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <button type="button" class="btn-close text-end d-block d-md-none exit-x" data-bs-dismiss="modal"
+                aria-label="Close"></button>
               <div class="text-center mt-4">
                 <span class="mdi mdi-eye">{{ keep.views }}</span>
                 <span class="mdi mdi-key">{{ keep.kept }}</span>
@@ -54,10 +55,10 @@ const keep = computed(() => AppState.activeKeep)
 
 <style lang="scss" scoped>
 img {
-  width: 100%;
-  height: auto;
+  width: calc(100% + 1px);
+  height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: end;
   // display: block;
 }
 
@@ -76,6 +77,13 @@ img {
   }
 }
 
+.exit-x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+}
+
 .prof-img {
   max-width: 32px;
 
@@ -92,8 +100,15 @@ img {
   padding: 0px;
   display: flex;
   overflow: hidden;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+
+@media (min-width: 768px) {
+  #image {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
 }
 
 .footer {
