@@ -24,7 +24,27 @@ main {
   font-weight: 50;
 }
 
+.marko-font {
+  font-family: marko;
+  font-weight: 400;
+}
+
+.inter-font {
+  font-family: inter;
+  font-weight: 400;
+}
+
 @font-face {
   font-family: metal;
   src: url('../fonts/MetalMacabre.ttf');
+}
+
+@font-face {
+  font-family: marko;
+  src: url('../fonts/MarkoOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: inter;
+  src: url('../fonts/Inter-VariableFont_opsz,wght.ttf');
 }

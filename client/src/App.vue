@@ -16,4 +16,9 @@ import { RouterView } from 'vue-router';
   </footer>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+main {
+  background-color: #fef6f0;
+  font-family: inter;
+}
+</style>

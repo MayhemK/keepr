@@ -13,7 +13,7 @@ const keep = computed(() => AppState.activeKeep)
 
 
 <template>
-  <div class="modal fade" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
+  <div class="modal fade inter-font" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div v-if="keep" class="modal-content">
         <section class="container">
@@ -25,10 +25,9 @@ const keep = computed(() => AppState.activeKeep)
               <!-- <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button> -->
               <div class="text-center mt-4">
                 <span class="mdi mdi-eye">{{ keep.views }}</span>
-                <img src="" alt="">
                 <span class="mdi mdi-khanda">{{ keep.kept }}</span>
               </div>
-              <div class="text-center keep-title metal-font fs-4 mt-3">
+              <div class="text-center keep-title marko-font fs-3 mt-3">
                 {{ keep.name }}
               </div>
               <div class="text-center mt-3">
