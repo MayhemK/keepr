@@ -13,6 +13,4 @@ import { computed, ref, onMounted } from 'vue';
 </template>
 
 
-<style lang="scss" scoped>
-.component {}
-</style>
+<style lang="scss" scoped></style>
