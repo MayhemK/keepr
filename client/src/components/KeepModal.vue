@@ -25,7 +25,7 @@ const keep = computed(() => AppState.activeKeep)
               <!-- <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button> -->
               <div class="text-center mt-4">
                 <span class="mdi mdi-eye">{{ keep.views }}</span>
-                <span class="mdi mdi-khanda">{{ keep.kept }}</span>
+                <span class="mdi mdi-key">{{ keep.kept }}</span>
               </div>
               <div class="text-center keep-title marko-font fs-3 mt-3">
                 {{ keep.name }}
