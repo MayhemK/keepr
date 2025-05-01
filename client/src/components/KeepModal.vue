@@ -53,9 +53,8 @@ function hideAndNavigate() {
               </div>
               <div class="text-end footer mb-3 mt-4">
                 <div>SAVE</div>
-                <div>
-                  <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }"
-                    @click.prevent="hideAndNavigate()">
+                <div data-bs-dismiss="modal">
+                  <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                     <img class="prof-img" :src="keep.creator.picture" alt="">
                     {{ keep.creator.name }}
                   </RouterLink>
