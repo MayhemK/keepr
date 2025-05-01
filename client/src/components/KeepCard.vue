@@ -27,8 +27,6 @@ function setActiveKeep() {
 
 
 <style lang="scss" scoped>
-img {}
-
 .keep-img {
   min-height: 80px;
   display: block;

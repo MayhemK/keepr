@@ -1,11 +1,10 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import KeepModal from '@/components/KeepModal.vue';
-import { logger } from '@/utils/Logger.js';
 
 const keeps = computed(() => AppState.keeps)
 
