@@ -1,14 +1,31 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { router } from '@/router.js';
+import { Modal } from 'bootstrap';
 // import { keepsService } from '@/services/KeepsService.js';
 import { computed } from 'vue';
 
 
 const keep = computed(() => AppState.activeKeep)
 
-// function clearKeep() {
-//   keepsService.clearKeep()
-// }
+function hideModal() {
+  const modalElement = document.getElementById('keepModal');
+  if (modalElement) {
+    const modalInstance = Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+    else {
+      Modal.getOrCreateInstance('#keepModal').hide()
+    }
+  }
+}
+
+function hideAndNavigate() {
+  hideModal();
+  router.push({ name: 'Profile', params: { profileId: keep.value.creatorId } })
+}
+
 </script>
 
 
@@ -37,8 +54,11 @@ const keep = computed(() => AppState.activeKeep)
               <div class="text-end footer mb-3 mt-4">
                 <div>SAVE</div>
                 <div>
-                  <img class="prof-img" :src="keep.creator.picture" alt="">
-                  {{ keep.creator.name }}
+                  <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }"
+                    @click.prevent="hideAndNavigate()">
+                    <img class="prof-img" :src="keep.creator.picture" alt="">
+                    {{ keep.creator.name }}
+                  </RouterLink>
                 </div>
               </div>
             </div>
