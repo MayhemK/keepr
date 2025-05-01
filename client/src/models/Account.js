@@ -13,6 +13,7 @@ export class Account extends Profile {
     super(data)
     this.id = data.id
     this.email = data.email
+    this.coverImg = data.coverImg
     // TODO add additional properties if needed
   }
 }

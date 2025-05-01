@@ -1,40 +1,60 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-import { vaultsService } from '@/services/VaultsService.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
+import KeepCard from '@/components/KeepCard.vue';
+import { keepsService } from '@/services/KeepsService.js';
+import KeepModal from '@/components/KeepModal.vue';
 
 // const vaults = computed(() => AppState.vaults)
 
 onMounted(() => {
-  getAllVaults()
+  getAllKeeps()
 })
 
-async function getAllVaults() {
+
+async function getAllKeeps() {
   try {
-    await vaultsService.getAllVaults()
+    await keepsService.getAllKeeps()
   }
   catch (error) {
     Pop.error(error);
   }
 }
 
+
+
 </script>
 
 <template>
-  <p>HI</p>
-  <section class="container">
-    <div class="row">
-      <div class="col-3">
-        <div class="card">
-          <p>IMAGE</p>
-          <div class="card-body">
-            <p>Inner text</p>
-          </div>
-        </div>
+  <section class="container pt-3">
+    <div class="masonry-row">
+      <div v-for="keep in keeps" :key="keep.id" class="masonry-item">
+        <KeepCard :keep="keep" />
       </div>
     </div>
   </section>
+
+
+  <KeepModal />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.masonry-row {
+  column-count: 4;
+  column-gap: 15px;
+  padding: 0 15px;
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 15px;
+  break-inside: avoid;
+
+}
+</style>
