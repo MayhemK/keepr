@@ -49,6 +49,16 @@ CREATE TABLE vaultkeep(
   keep_id INT NOT NULL,
   FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE,
   FOREIGN KEY (vault_id) REFERENCES vaults(id) ON DELETE CASCADE,
-  FOREIGN KEY (keep_id) REFERENCES keeps(id) ON DELETE CASCADE,
-  UNIQUE(creator_id, vault_id, keep_id)
+  FOREIGN KEY (keep_id) REFERENCES keeps(id) ON DELETE CASCADE
 )
+
+DROP TABLE `vaultKeep`
+
+SELECT
+    vaultKeep.*,
+    keeps.*,
+    accounts.*
+    FROM vaultKeep
+    INNER JOIN accounts ON accounts.id = vaultKeep.creator_id
+    INNER JOIN keeps ON keeps.id = vaultKeep.keep_id
+    WHERE vaultKeep.vault_id = 106;

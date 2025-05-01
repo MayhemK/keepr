@@ -2,6 +2,7 @@
 
 
 
+
 namespace keepr.Repositories;
 
 public class VaultKeepersRepository
@@ -25,22 +26,36 @@ public class VaultKeepersRepository
     return vaultKeeps;
   }
 
-  internal List<VaultKeepsProfile> GetVaultKeepsProfileByVaultId(int vaultId)
+  internal List<VKModel> GetVaultKeepsProfileByVaultId(int vaultId)
   {
+    // string sql = @"
+    // SELECT
+    // vaultKeep.*,
+    // accounts.*
+    // FROM vaultKeep
+    // INNER JOIN accounts ON accounts.id = vaultKeep.creator_id
+    // WHERE vaultKeep.vault_id = @vaultId;";
+
     string sql = @"
     SELECT
-    vaultkeep.*,
+    vaultKeep.*,
+    keeps.*,
     accounts.*
-    FROM vaultkeep
-    INNER JOIN accounts ON accounts.id = vaultkeep.account_id
-    WHERE vaultkeep.vault_id = @vaultId;";
+    FROM vaultKeep
+    INNER JOIN accounts ON accounts.id = vaultKeep.creator_id
+    INNER JOIN keeps ON keeps.id = vaultKeep.keep_id
+    WHERE vaultKeep.vault_id = @vaultId;";
 
-    List<VaultKeepsProfile> vaultKeepsProfiles = _db.Query(sql, (VaultKeeps vaultkeeps, VaultKeepsProfile account) =>
+    // string sql = "SELECT * FROM vaultKeep WHERE vault_id = @vaultId;";
+
+    List<VKModel> vaultKeepsProfiles = _db.Query(sql, (VaultKeeps vaultkeeps, VKModel model, Profile account) =>
     {
-      account.VaultId = vaultkeeps.VaultId;
-      account.VaultKeepsId = vaultkeeps.Id;
-      return account;
+      model.Creator = account;
+      model.VaultKeepId = vaultkeeps.Id;
+      return model;
     }, new { vaultId }).ToList();
+
+    // List<VaultKeepsProfile> vaultKeepsProfiles = _db.Query<VaultKeepsProfile>(sql, new { vaultId }).ToList();
     return vaultKeepsProfiles;
   }
 
@@ -60,5 +75,10 @@ public class VaultKeepersRepository
 
     VaultKeeps vaultKeeps = _db.Query<VaultKeeps>(sql, new { vaultKeepsId }).SingleOrDefault();
     return vaultKeeps;
+  }
+
+  internal List<VaultKeepsProfile> GetVaultKeepsProfileByAccountId(object vaultId)
+  {
+    throw new NotImplementedException();
   }
 }

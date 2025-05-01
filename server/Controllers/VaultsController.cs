@@ -97,12 +97,12 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{vaultId}/keeps")]
-  public ActionResult<List<VaultKeepsProfile>> GetVaultKeepsProfileByVaultId(int vaultId)
+  public ActionResult<List<VKModel>> GetVaultKeepsProfileByVaultId(int vaultId)
   {
     try
     {
-      List<VaultKeepsProfile> vaultKeepsProfiles = _vaultKeepersService.GetVaultKeepsProfileByVaultId(vaultId);
-      return Ok(vaultKeepsProfiles);
+      List<VKModel> vKModels = _vaultKeepersService.GetVaultKeepsProfileByVaultId(vaultId);
+      return Ok(vKModels);
     }
     catch (Exception exception)
     {

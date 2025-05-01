@@ -47,19 +47,6 @@ public class VaultKeepsController : ControllerBase
     }
   }
 
-  // [HttpGet]
-  // public ActionResult<List<VaultKeeper>> GetAll()
-  // {
-  //   try 
-  //   {
-  //   List<VaultKeeper> vaultKeeper = _vaultKeepersService.GetAll();
-  //   return Ok(vaultKeeper);
-  //   }
-  //   catch (Exception exception)
-  //   {
-  //     return BadRequest(exception.Message);
-  //   }
-  // }
 
 
 }

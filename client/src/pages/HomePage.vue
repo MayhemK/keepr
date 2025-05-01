@@ -7,6 +7,7 @@ import { keepsService } from '@/services/KeepsService.js';
 import KeepModal from '@/components/KeepModal.vue';
 
 // const vaults = computed(() => AppState.vaults)
+const keeps = computed(() => AppState.keeps)
 
 onMounted(() => {
   getAllKeeps()

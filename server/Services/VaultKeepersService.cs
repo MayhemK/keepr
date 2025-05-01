@@ -18,12 +18,6 @@ public class VaultKeepersService
     return vaultKeeps;
   }
 
-  internal List<VaultKeepsProfile> GetVaultKeepsProfileByVaultId(int vaultId)
-  {
-    List<VaultKeepsProfile> vaultKeepsProfiles = _repository.GetVaultKeepsProfileByVaultId(vaultId);
-    return vaultKeepsProfiles;
-  }
-
   internal void DeleteVaultKeeps(int vaultKeepsId, Account userInfo)
   {
     VaultKeeps vaultKeeps = GetVaultKeepsById(vaultKeepsId);
@@ -44,4 +38,12 @@ public class VaultKeepersService
 
     return vaultKeeps;
   }
+
+  internal List<VKModel> GetVaultKeepsProfileByVaultId(int vaultId)
+  {
+    List<VKModel> vKModels = _repository.GetVaultKeepsProfileByVaultId(vaultId);
+    return vKModels;
+  }
+
+
 }
