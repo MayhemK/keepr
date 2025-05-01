@@ -23,17 +23,17 @@ const keep = computed(() => AppState.activeKeep)
             </div>
             <div class="col-md-6" id="info">
               <!-- <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button> -->
-              <div class="text-center mt-5">
+              <div class="text-center mt-4">
                 <span class="mdi mdi-eye">{{ keep.views }}</span>
                 <span class="mdi mdi-khanda">{{ keep.kept }}</span>
               </div>
-              <div class="text-center metal-font fs-4">
+              <div class="text-center keep-title metal-font fs-4 mt-3">
                 {{ keep.name }}
               </div>
-              <div class="text-center">
+              <div class="text-center mt-3">
                 {{ keep.description }}
               </div>
-              <div class="text-end footer mb-0">
+              <div class="text-end footer mb-3 mt-4">
                 <div>SAVE</div>
                 <div>
                   <img class="prof-img" :src="keep.creator.picture" alt="">
@@ -54,7 +54,7 @@ const keep = computed(() => AppState.activeKeep)
 
 <style lang="scss" scoped>
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   object-position: center;
@@ -84,6 +84,7 @@ img {
 #info {
   display: grid;
   justify-content: space-around;
+  // align-content: space-around;
   object-fit: cover;
 }
 
@@ -99,6 +100,14 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: end;
+}
+
+.keep-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
 }
 
 #keepModal {

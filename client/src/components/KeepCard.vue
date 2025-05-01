@@ -18,18 +18,19 @@ function setActiveKeep() {
   <div class="keep-card" type="button" data-bs-toggle="modal" data-bs-target="#keepModal" @click="setActiveKeep()">
     <div class="img-cont">
       <img :src="keep.img" :alt="`A picture of the ${keep.name} keep`" class="keep-img rounded-3">
-      <span class="metal-font overlap">{{ keep.name }}</span>
+      <div class="metal-font overlap">{{ keep.name }}</div>
+      <img :src="keep.creator.picture" class="prof-img overlap-2 rounded-5 ">
     </div>
+
   </div>
 </template>
 
 
 <style lang="scss" scoped>
-img {
-  min-height: 80px;
-}
+img {}
 
 .keep-img {
+  min-height: 80px;
   display: block;
   width: 100%;
   height: auto;
@@ -71,5 +72,18 @@ img {
   font-size: 1.2rem;
   text-shadow: 1px 1px 3px black;
   z-index: 2;
+}
+
+.overlap-2 {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+.prof-img {
+  max-height: 3rem;
+  border: 2px black;
+
 }
 </style>
