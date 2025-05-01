@@ -1,38 +1,26 @@
 <script setup>
-import { Keep } from '@/models/Keep.js';
-import { keepsService } from '@/services/KeepsService.js';
+import { Vault } from '@/models/Vault.js';
 
-
-const props = defineProps({
-  keep: { type: Keep, required: true }
+defineProps({
+  vault: { type: Vault, required: true }
 })
 
-function setActiveKeep() {
-  keepsService.setActiveKeep(props.keep)
-}
+
 </script>
 
 
 <template>
-
-  <div class="" type="button" data-bs-toggle="modal" data-bs-target="#keepModal" @click="setActiveKeep()">
+  <div class="mb-4" type="button">
     <div class="img-cont">
-      <img :src="keep.img" :alt="`A picture of the ${keep.name} keep`" class="keep-img rounded-3">
-      <div class="marko-font overlap">{{ keep.name }}</div>
-      <img :src="keep.creator.picture" class="prof-img overlap-2 rounded-5 ">
+      <img :src="vault.img" :alt="`A picture of the ${vault.name} vault`" class="vault-img rounded-3">
+      <div class="marko-font overlap">{{ vault.name }}</div>
+      <div v-if="vault.isPrivate == true" class="mdi mdi-lock overlap-2 text-light text-shadow fs-2"></div>
     </div>
   </div>
 </template>
 
 
 <style lang="scss" scoped>
-.keep-img {
-  min-height: 80px;
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .img-cont {
   position: relative;
   display: block;
@@ -55,6 +43,12 @@ function setActiveKeep() {
   z-index: 1;
 }
 
+.vault-img {
+  min-height: 60px;
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 .overlap {
   position: absolute;
@@ -73,11 +67,5 @@ function setActiveKeep() {
   bottom: 10px;
   right: 10px;
   z-index: 2;
-}
-
-.prof-img {
-  max-height: 2rem;
-  border: 2px black;
-
 }
 </style>
