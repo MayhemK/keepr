@@ -7,6 +7,7 @@ import KeepModal from '@/components/KeepModal.vue';
 import { vaultsService } from '@/services/VaultsService.js';
 import VaultCard from '@/components/VaultCard.vue';
 import { AuthService } from '@/services/AuthService.js';
+import AccountForm from '@/components/AccountForm.vue';
 
 const account = computed(() => AppState.account)
 const identity = computed(() => AppState.identity)
@@ -37,6 +38,9 @@ function logout() {
       <div>... edit account</div>
       <div class="fs-3 marko-font">
         {{ account.name }}
+      </div>
+      <div>
+        <AccountForm />
       </div>
       <div>
         <span># Vaults | # Keeps</span>

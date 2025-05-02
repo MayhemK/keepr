@@ -1,9 +1,21 @@
+import { Pop } from '@/utils/Pop.js'
 import { AppState } from '../AppState.js'
 import { Account } from '../models/Account.js'
 import { logger } from '../utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class AccountService {
+  async updateAccount(accountData) {
+    try 
+    {
+      const res = await api.put('/account', accountData)
+      const updatedAccount = new Account(res.data)
+      AppState.account = updatedAccount
+    }
+    catch (error){
+      Pop.error(error);
+    }
+  }
   async getAccount() {
     try {
       const res = await api.get('/account')
