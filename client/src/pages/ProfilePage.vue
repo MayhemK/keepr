@@ -5,6 +5,7 @@ import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { profileService } from '@/services/ProfileService.js';
 import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
+import KeepModal from '@/components/KeepModal.vue';
 
 const route = useRoute()
 onMounted(() => {
@@ -69,6 +70,7 @@ async function getProfileById() {
 
     </div>
   </div> -->
+  <KeepModal />
 </template>
 
 

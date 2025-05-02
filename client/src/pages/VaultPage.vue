@@ -2,6 +2,7 @@
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import { Vault } from '@/models/Vault.js';
+import { router } from '@/router.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
@@ -22,6 +23,7 @@ async function getVaultById() {
   }
   catch (error) {
     Pop.error(error);
+    router.push({ name: 'Home' })
   }
 }
 

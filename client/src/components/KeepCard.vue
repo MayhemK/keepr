@@ -1,6 +1,8 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Keep } from '@/models/Keep.js';
 import { keepsService } from '@/services/KeepsService.js';
+import { Pop } from '@/utils/Pop.js';
 
 
 const props = defineProps({
@@ -12,10 +14,21 @@ const emit = defineEmits(['removeKeep'])
 
 function setActiveKeep() {
   keepsService.setActiveKeep(props.keep)
+  plusViews()
 }
 
 function removeKeep() {
   emit('removeKeep', props.keep.id);
+}
+
+function plusViews() {
+  try {
+    keepsService.plusViews(props.keep.id)
+
+  }
+  catch (error) {
+    Pop.error(error);
+  }
 }
 </script>
 

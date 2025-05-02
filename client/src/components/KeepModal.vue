@@ -1,12 +1,18 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { router } from '@/router.js';
+import { keepsService } from '@/services/KeepsService.js';
+import { vaultsService } from '@/services/VaultsService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
 import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
 // import { keepsService } from '@/services/KeepsService.js';
 import { computed } from 'vue';
 
 
 const keep = computed(() => AppState.activeKeep)
+const account = computed(() => AppState.account)
+const myVault = computed(() => AppState.myVaults)
 
 function hideModal() {
   const modalElement = document.getElementById('keepModal');
@@ -19,6 +25,26 @@ function hideModal() {
       Modal.getOrCreateInstance('#keepModal').hide()
     }
   }
+}
+
+async function saveKeep(vaultId) {
+  const keep = AppState.activeKeep.id
+  const vault = vaultId
+
+  const vkData = { vaultId: vault, keepId: keep }
+  keepsService.saveKeepToVault(vkData)
+
+  console.log(vkData);
+
+  // try {
+
+  // }
+  // catch (error) {
+  //   Pop.error(error);
+  // }
+
+  // logger.log()
+
 }
 
 function hideAndNavigate() {
@@ -52,7 +78,21 @@ function hideAndNavigate() {
                 {{ keep.description }}
               </div>
               <div class="text-end footer mb-3 mt-4">
-                <div>SAVE</div>
+                <div>
+                  save to
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Dropdown
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li v-for="vault in myVault" :key="vault.id"><button button class="dropdown-item" type="button"
+                          @click="saveKeep(vault.id)">
+                          {{ vault.name }}
+                        </button> </li>
+                    </ul>
+                  </div>
+                </div>
                 <div data-bs-dismiss="modal">
                   <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                     <img class="prof-img" :src="keep.creator.picture" alt="">
