@@ -28,42 +28,18 @@ function logout() {
 
       <img class="navbar-brand" alt="logo" src="/src/assets/img/Keepr logo.png" height="65" />
 
-      <Login />
       <div>
-        <RouterLink :to="{ name: 'Account' }">
-          <img :src="account.picture" alt="">
-        </RouterLink>
-      </div>
-      <div>
-        <span class="navbar-text">
-          <button class="btn selectable text-warning" @click="login" v-if="!identity">
-            Login
-          </button>
-          <div v-else>
-            <div class="dropdown">
-              <div role="button" class="selectable no-select" data-bs-toggle="dropdown" aria-expanded="false"
-                title="open account menu">
-                <div v-if="account?.picture || identity?.picture">
-                  <img :src="account?.picture || identity?.picture" alt="account photo" height="40" class="user-img" />
-                </div>
-              </div>
-              <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" role="menu" title="account menu">
-                <div class="list-group">
-                  <RouterLink :to="{ name: 'Account' }">
-                    <div class="list-group-item dropdown-items list-group-item-action">
-                      Manage Account
-                    </div>
-                  </RouterLink>
-                  <div class="list-group-item dropdown-item list-group-item-action text-danger selectable"
-                    @click="logout">
-                    <i class="mdi mdi-logout"></i>
-                    logout
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </span>
+        <div v-if="account">
+          <RouterLink :to="{ name: 'Account' }">
+            <img :src="account.picture" alt="" height="40">
+          </RouterLink>
+          <span type="button" @click="logout()" class="mdi mdi-logout fs-4 ms-2 align-middle">
+          </span>
+        </div>
+        <button class="btn selectable text-danger" @click="login" v-else>
+          Login
+        </button>
+
       </div>
 
     </div>

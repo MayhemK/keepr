@@ -6,6 +6,7 @@ import KeepCard from '@/components/KeepCard.vue';
 import KeepModal from '@/components/KeepModal.vue';
 import { vaultsService } from '@/services/VaultsService.js';
 import VaultCard from '@/components/VaultCard.vue';
+import { AuthService } from '@/services/AuthService.js';
 
 const account = computed(() => AppState.account)
 const identity = computed(() => AppState.identity)
@@ -22,7 +23,9 @@ async function getAllKeeps() {
 }
 async function getAllVaults() {
   await vaultsService.getAllVaults()
-
+}
+function logout() {
+  AuthService.logout()
 }
 </script>
 
@@ -32,6 +35,9 @@ async function getAllVaults() {
       <img :src="account.coverImg" :alt="identity.nickname + ' profile cover image'">
       <img :src="account.picture" :alt="identity.nickname + ' account picture'">
       <div>... edit account</div>
+      <div type="button" @click="logout()">
+        logout
+      </div>
       <div>
         {{ account.name }}
       </div>
