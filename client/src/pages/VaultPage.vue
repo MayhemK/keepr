@@ -33,6 +33,21 @@ async function getKeepsByVault() {
     Pop.error(error);
   }
 }
+
+async function removeKeepFromVault(vaultKeepId) {
+  try {
+    const yes = await Pop.confirm('Are you sure you want to remove this keep from the vault?')
+    if (!yes) {
+      return;
+    }
+    await vaultsService.removeKeepFromVault(vaultKeepId)
+    Pop.success('Keep removed from Vault!')
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
 </script>
 
 
@@ -49,7 +64,7 @@ async function getKeepsByVault() {
     <section class="container pt-3">
       <div class="masonry-row">
         <div v-for="keep in keeps" :key="keep.id" class="masonry-item">
-          <KeepCard :keep="keep" :hideCreator="true" />
+          <KeepCard :keep="keep" :hideCreator="true" :isOnVaultPage="true" @removeKeep="removeKeepFromVault(keep.id)" />
         </div>
       </div>
     </section>

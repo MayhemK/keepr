@@ -5,11 +5,17 @@ import { keepsService } from '@/services/KeepsService.js';
 
 const props = defineProps({
   keep: { type: Keep, required: true },
-  hideCreator: { type: Boolean, default: false }
+  hideCreator: { type: Boolean, default: false },
+  isOnVaultPage: { type: Boolean, default: false }
 })
+const emit = defineEmits(['removeKeep'])
 
 function setActiveKeep() {
   keepsService.setActiveKeep(props.keep)
+}
+
+function removeKeep() {
+  emit('removeKeep', props.keep.id);
 }
 </script>
 
@@ -23,6 +29,10 @@ function setActiveKeep() {
       <img v-if="!hideCreator" :src="keep.creator.picture" class="prof-img overlap-2 rounded-5 ">
     </div>
   </div>
+  <button v-if="isOnVaultPage" class="btn btn-danger btn-sm remove-button" @click.stop="removeKeep()"
+    title="Remove Keep from Vault">
+    <i class="mdi mdi-delete-forever"></i> </button>
+
 </template>
 
 

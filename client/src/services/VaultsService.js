@@ -4,8 +4,20 @@ import { AppState } from "@/AppState.js"
 import { Vault } from "@/models/Vault.js"
 import App from "@/App.vue"
 import { Keep } from "@/models/Keep.js"
+import { Pop } from "@/utils/Pop.js"
 
 class VaultsService {
+  async removeKeepFromVault(vaultKeepId) {
+    try {
+      const res = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
+      logger.log((res.data));
+      AppState.vkkeeps = AppState.vkkeeps.filter(k => k.id !== vaultKeepId);
+      
+    }
+    catch (error){
+      Pop.error(error);
+    }
+  }
   async getVaultById(vaultId) {
     const res = await api.get(`api/vaults/${vaultId}`)
     AppState.activeVault = new Vault(res.data)
