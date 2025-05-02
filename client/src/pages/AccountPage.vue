@@ -35,10 +35,7 @@ function logout() {
       <img :src="account.coverImg" :alt="identity.nickname + ' profile cover image'">
       <img :src="account.picture" :alt="identity.nickname + ' account picture'">
       <div>... edit account</div>
-      <div type="button" @click="logout()">
-        logout
-      </div>
-      <div>
+      <div class="fs-3 marko-font">
         {{ account.name }}
       </div>
       <div>
@@ -50,9 +47,12 @@ function logout() {
           <section class="container">
             <div class="row">
               <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
-                <div v-if="account.id == vault.creatorId">
-                  <VaultCard :vault="vault" />
-                </div>
+                <RouterLink :to="{ name: 'VaultPage', params: { vaultId: vault.id } }"
+                  :title="`Go to ${vault.name} page`">
+                  <div>
+                    <VaultCard :vault="vault" />
+                  </div>
+                </RouterLink>
               </div>
             </div>
           </section>

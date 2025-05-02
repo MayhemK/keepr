@@ -4,7 +4,8 @@ import { keepsService } from '@/services/KeepsService.js';
 
 
 const props = defineProps({
-  keep: { type: Keep, required: true }
+  keep: { type: Keep, required: true },
+  hideCreator: { type: Boolean, default: false }
 })
 
 function setActiveKeep() {
@@ -19,7 +20,7 @@ function setActiveKeep() {
     <div class="img-cont">
       <img :src="keep.img" :alt="`A picture of the ${keep.name} keep`" class="keep-img rounded-3">
       <div class="marko-font overlap">{{ keep.name }}</div>
-      <img :src="keep.creator.picture" class="prof-img overlap-2 rounded-5 ">
+      <img v-if="!hideCreator" :src="keep.creator.picture" class="prof-img overlap-2 rounded-5 ">
     </div>
   </div>
 </template>
