@@ -93,4 +93,18 @@ public class KeepsRepository
     //   throw new Exception(rowsAffected + " Rows were deleted, Only one was intended");
     // }
   }
+
+  internal void IncreaseViews(Keep keep)
+  {
+    string sql = @"
+    UPDATE keeps
+    SET views = @Views
+    WHERE id = @Id LIMIT 1;";
+    int rowsAffected = _db.Execute(sql, keep);
+
+    if (rowsAffected != 1)
+    {
+      throw new Exception(rowsAffected + " rows were affected and that is bad");
+    }
+  }
 }

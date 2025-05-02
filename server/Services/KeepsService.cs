@@ -10,6 +10,7 @@ public class KeepsService
     _repository = repository;
   }
   private readonly KeepsRepository _repository;
+  private object _db;
 
   internal Keep Create(Keep keepData)
   {
@@ -60,4 +61,14 @@ public class KeepsService
     _repository.Delete(keepId);
     return keep.Name + " had been deleted!";
   }
+
+  internal Keep IncreaseViews(int keepId)
+  {
+    Keep keep = GetById(keepId);
+    keep.Views++;
+    _repository.IncreaseViews(keep);
+    return keep;
+  }
 }
+
+
