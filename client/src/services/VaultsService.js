@@ -34,6 +34,13 @@ class VaultsService {
     logger.log(res)
     AppState.vkkeeps = res.data.map(pojo => new VaultKeep(pojo))
   }
+
+  async createVault(vaultData) {
+    const res = await api.post('api/vaults', vaultData)
+    AppState.vaults.unshift(res.data);
+    return res.data
+  }
 }
+
 
 export const vaultsService = new VaultsService()

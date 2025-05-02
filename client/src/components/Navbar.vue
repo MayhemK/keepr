@@ -18,6 +18,7 @@ function logout() {
 function createNewVault() {
   try {
     logger.log('creat new vault')
+    emit('openCreateVaultModal')
   }
   catch (error) {
     Pop.error(error);
