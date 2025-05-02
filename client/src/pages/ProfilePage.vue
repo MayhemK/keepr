@@ -4,7 +4,7 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { profileService } from '@/services/ProfileService.js';
-import { Modal } from 'bootstrap';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
 
 const route = useRoute()
 onMounted(() => {

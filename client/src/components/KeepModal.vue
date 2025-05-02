@@ -1,7 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { router } from '@/router.js';
-import { Modal } from 'bootstrap';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
 // import { keepsService } from '@/services/KeepsService.js';
 import { computed } from 'vue';
 

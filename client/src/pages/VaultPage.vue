@@ -48,6 +48,16 @@ async function removeKeepFromVault(vaultKeepId) {
   }
 }
 
+async function deleteVault() {
+  try {
+    const confirmed = await Pop.confirm(`Are you sure you want to delete this vault? ,`, 'Yes, Delete', 'No')
+    if (!confirmed) return
+    await vaultsService.deleteVault(route.params.vaultId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 
@@ -59,6 +69,13 @@ async function removeKeepFromVault(vaultKeepId) {
           <img :src="vault.img" alt="">
           <div class="fs-2 text-center marko-font">{{ vault.name }}</div>
           <div class="text-center fs-4">{{ vault.description }}</div>
+
+          <div class="row justify-content-center mt-3">
+            <div class="col-12 col-md-8 text-end"> <button class="btn btn-danger" @click="deleteVault()">
+                Delete vault
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
