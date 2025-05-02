@@ -32,8 +32,10 @@ public class AccountService
   internal Account Edit(Account editData, string accountId)
   {
     Account original = GetAccount(accountId);
-    original.Name = editData.Name ?? editData.Name;
-    original.Picture = editData.Picture ?? editData.Picture;
+    original.Name = editData.Name ?? original.Name;
+    original.Picture = editData.Picture ?? original.Picture;
+    original.CoverImg = editData.CoverImg ?? original.CoverImg;
     return _repo.Edit(original);
   }
+
 }
