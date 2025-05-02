@@ -1,18 +1,39 @@
 <script setup>
+import { ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 import { RouterView } from 'vue-router';
-
+import CreateKeepModal from './components/CreateKeepModal.vue';
+import { Pop } from './utils/Pop.js';
+import { keepsService } from './services/KeepsService.js';
+const showCreateKeepModal = ref(false);
+function openCreateKeepModal() {
+  showCreateKeepModal.value = true;
+}
+function closeCreateKeepModal() {
+  showCreateKeepModal.value = false;
+}
+async function handleCreateKeep(newKeepData) {
+  try {
+    const createdKeep = await keepsService.CreateKeepModal(newKeepData)
+    Pop.success('keep created successfully!')
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+  closeCreateKeepModal();
+}
 </script>
 
 <template>
   <div id="app-container">
     <header class=" app-header order-2 order-md-1 sticky-top">
-      <Navbar />
+      <Navbar @open-create-keep-modal="openCreateKeepModal" />
     </header>
     <main class="app-content order-1 order-md-2">
       <RouterView />
     </main>
   </div>
+  <CreateKeepModal :isVisible="showCreateKeepModal" @close="closeCreateKeepModal" @createKeep="handleCreateKeep" />
 </template>
 
 <style lang="scss">

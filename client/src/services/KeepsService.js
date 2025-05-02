@@ -19,6 +19,11 @@ async getAllKeeps() {
   logger.log(res)
   AppState.keeps = res.data.map(pojo => new Keep(pojo))
 }
+async CreateKeepModal(newKeepData) {
+  logger.log(newKeepData)
+  const res = await api.post('api/keeps', newKeepData)
+  AppState.keeps.unshift(res.data);
+  return res.data
 }
-
+}
 export const keepsService = new KeepsService()

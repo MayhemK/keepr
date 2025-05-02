@@ -3,15 +3,35 @@ import { AppState } from '@/AppState.js';
 import Login from './Login.vue';
 import { AuthService } from '@/services/AuthService.js';
 import { computed } from 'vue';
+import { Pop } from '@/utils/Pop.js';
+import { logger } from '@/utils/Logger.js';
 
 const identity = computed(() => AppState.identity)
 const account = computed(() => AppState.account)
-
+const emit = defineEmits(['openCreateKeepModal', 'openCreateVaultModal']);
 function login() {
   AuthService.loginWithRedirect()
 }
 function logout() {
   AuthService.logout()
+}
+function createNewVault() {
+  try {
+    logger.log('creat new vault')
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
+function createNewKeep() {
+  try {
+    logger.log('create new keep')
+    emit('openCreateKeepModal')
+  }
+  catch (error) {
+    Pop.error(error);
+  }
 }
 
 </script>
@@ -23,7 +43,10 @@ function logout() {
         <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-dark">
           <div>Home</div>
         </RouterLink>
-        <div>Create 🔻</div>
+        <div v-if="account" class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-dark btn-sm" @click="createNewKeep">New Keep</button>
+          <button class="btn btn-outline-dark btn-sm" @click="createNewVault">New Vault</button>
+        </div>
       </div>
 
       <img class="navbar-brand" alt="logo" src="/src/assets/img/Keepr logo.png" height="65" />
