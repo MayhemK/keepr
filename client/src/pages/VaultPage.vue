@@ -64,7 +64,8 @@ async function removeKeepFromVault(vaultKeepId) {
     <section class="container pt-3">
       <div class="masonry-row">
         <div v-for="keep in keeps" :key="keep.id" class="masonry-item">
-          <KeepCard :keep="keep" :hideCreator="true" :isOnVaultPage="true" @removeKeep="removeKeepFromVault(keep.id)" />
+          <KeepCard :keep="keep" :hideCreator="true" :isOnVaultPage="true"
+            @removeKeep="removeKeepFromVault(keep.vaultKeepId)" />
         </div>
       </div>
     </section>

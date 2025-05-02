@@ -86,7 +86,7 @@ public class KeepsRepository
 
   internal void Delete(int keepId)
   {
-    string sql = "DELETE FROM keeps WHERE id = @id LIMIT 1;";
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
     int rowsAffected = _db.Execute(sql, new { keepId });
     // if (rowsAffected != 1)
     // {

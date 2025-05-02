@@ -5,13 +5,14 @@ import { Vault } from "@/models/Vault.js"
 import App from "@/App.vue"
 import { Keep } from "@/models/Keep.js"
 import { Pop } from "@/utils/Pop.js"
+import { VaultKeep } from "@/models/VaultKeeps.js"
 
 class VaultsService {
   async removeKeepFromVault(vaultKeepId) {
     try {
       const res = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
       logger.log((res.data));
-      AppState.vkkeeps = AppState.vkkeeps.filter(k => k.id !== vaultKeepId);
+      // AppState.vkkeeps = AppState.vkkeeps.filter(k => k.vaultKeepId !== vaultKeepId);
       
     }
     catch (error){
@@ -31,7 +32,7 @@ class VaultsService {
   async getKeepsByVault(vaultId) {
     const res = await api.get(`api/vaults/${vaultId}/keeps`)
     logger.log(res)
-    AppState.vkkeeps = res.data.map(pojo => new Keep(pojo))
+    AppState.vkkeeps = res.data.map(pojo => new VaultKeep(pojo))
   }
 }
 

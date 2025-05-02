@@ -83,7 +83,7 @@ public class VaultsRepository
 
   public void Delete(int vaultId)
   {
-    string sql = "DELETE FROM vaults WHERE id = @id LIMIT 1;";
+    string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
     int rowsAffected = _db.Execute(sql, new { vaultId });
     // if (rowsAffected != 1)
     // {
