@@ -37,7 +37,7 @@ public class VaultsRepository
     vaults.*,
     accounts.*
     FROM vaults
-    INNER JOIN accounts on accounts.id = vaults.creator_id
+    INNER JOIN accounts ON accounts.id = vaults.creator_id
     WHERE vaults.id = @vaultId;";
 
     Vault foundVault = _db.Query(sql, (Vault vault, Profile account) =>

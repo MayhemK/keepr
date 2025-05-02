@@ -1,3 +1,4 @@
+
 namespace keepr.Repositories;
 
 public class ProfileRepository
@@ -8,4 +9,15 @@ public class ProfileRepository
     _db = db;
   }
 
+  internal Profiles GetProfileById(string profilesId)
+  {
+    string sql = @"
+    SELECT
+    accounts.*
+    FROM accounts
+    WHERE id = @ProfilesId;";
+
+    Profiles foundProfiles = _db.Query<Profiles>(sql, new { profilesId }).SingleOrDefault();
+    return foundProfiles;
+  }
 }
