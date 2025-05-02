@@ -1,16 +1,16 @@
 
-
-
-
 namespace keepr.Services;
 
 public class VaultKeepersService
+
 {
-  public VaultKeepersService(VaultKeepersRepository repository)
+  public VaultKeepersService(VaultKeepersRepository repository, VaultsService vaultsService)
   {
     _repository = repository;
+    _vaultsService = vaultsService;
   }
   private readonly VaultKeepersRepository _repository;
+  private readonly VaultsService _vaultsService;
 
   internal VaultKeeps CreateVK(VaultKeeps vaultKeeperData)
   {
@@ -39,8 +39,10 @@ public class VaultKeepersService
     return vaultKeeps;
   }
 
-  internal List<VKModel> GetVaultKeepsProfileByVaultId(int vaultId)
+  internal List<VKModel> GetVaultKeepsProfileByVaultId(int vaultId, Profile userId)
   {
+
+    _vaultsService.GetVaultById(vaultId, userId);
     List<VKModel> vKModels = _repository.GetVaultKeepsProfileByVaultId(vaultId);
     return vKModels;
   }

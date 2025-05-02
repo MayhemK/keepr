@@ -75,30 +75,14 @@ public class VaultsService
     return vault.Name + " had been deleted!";
   }
 
-  internal List<Vault> GetVaultsByProfileId(string profileId, string userId)
+  internal List<Vault> GetVaultsByProfileId(string profileId, Profile userId)
   {
     Profiles profile = _profileService.GetProfileById(profileId);
     List<Vault> vaults = _repository.GetVaultsByCreatorId(profileId);
-    List<Vault> filteredVaults = new List<Vault>();
+
     //TODO private vaults help reviews shut down restaurant
-    // foreach (Vault vault in vaults)
-    // {
-
-    //   if (vault.IsPrivate == false || vault.CreatorId == userId)
-    //   {
-    //     filteredVaults.Add(vault);
-    //   }
-    //   else
-    //   {
-    //     bool isKeeper = _vaultKeepersRepository.IsKeeper(vault.Id, userId);
-    //     if (isKeeper)
-    //     {
-    //       filteredVaults.Add(vault);
-    //     }
-    //   }
-    // }
 
 
-    return vaults;
+    return vaults.FindAll(vaults => vaults.IsPrivate == false || vaults.CreatorId == userId?.Id);
   }
 }
