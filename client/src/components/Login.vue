@@ -47,7 +47,7 @@ function logout() {
 </template>
 
 <style lang="scss" scoped>
-.user-img {
+.user-imgs {
   height: 40px;
   width: 40px;
   border-radius: 100px;
