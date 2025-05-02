@@ -90,4 +90,23 @@ public class VaultsRepository
     //   throw new Exception(rowsAffected + " Rows were deleted, Only one was intended");
     // }
   }
+
+  internal List<Vault> GetVaultsByCreatorId(string creatorId)
+  {
+    string sql = @"
+    SELECT
+    vaults.*,
+    accounts.*
+    FROM vaults
+    JOIN accounts ON vaults.creator_Id = accounts.id
+    WHERE vaults.creator_Id = @CreatorId;";
+
+    List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+          {
+            vault.Creator = profile;
+            return vault;
+          }, new { creatorId }).ToList();
+
+    return vaults;
+  }
 }

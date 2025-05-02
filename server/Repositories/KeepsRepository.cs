@@ -107,4 +107,22 @@ public class KeepsRepository
       throw new Exception(rowsAffected + " rows were affected and that is bad");
     }
   }
+
+  internal List<Keep> GetKeepsByCreatorId(string creatorId)
+  {
+    string sql = @"
+    SELECT
+    keeps.*,
+    accounts.*
+    FROM keeps 
+    JOIN accounts ON keeps.creator_Id = accounts.id
+    WHERE keeps.creator_Id = @CreatorId;";
+    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      return keep;
+    }, new { creatorId }).ToList();
+    return keeps;
+
+  }
 }

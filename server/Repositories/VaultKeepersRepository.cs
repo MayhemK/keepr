@@ -81,4 +81,9 @@ public class VaultKeepersRepository
   {
     throw new NotImplementedException();
   }
+
+  // internal bool IsKeeper(int id, string userId)
+  // {
+
+  // }
 }

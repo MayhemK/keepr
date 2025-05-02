@@ -69,6 +69,12 @@ public class KeepsService
     _repository.IncreaseViews(keep);
     return keep;
   }
+
+  internal List<Keep> GetKeepsByProfileId(string profileId)
+  {
+    List<Keep> keeps = _repository.GetKeepsByCreatorId(profileId);
+    return keeps;
+  }
 }
 
 

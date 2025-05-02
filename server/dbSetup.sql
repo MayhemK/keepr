@@ -62,3 +62,17 @@ SELECT
     INNER JOIN accounts ON accounts.id = vaultKeep.creator_id
     INNER JOIN keeps ON keeps.id = vaultKeep.keep_id
     WHERE vaultKeep.vault_id = 106;
+
+    SELECT
+    keeps.*,
+    accounts.*
+    FROM keeps 
+    JOIN accounts ON keeps.creatorId = account.id
+    WHERE creator_id = 67e32349d1583cd79fcfd0a4 ;
+
+        SELECT
+    vaults.*,
+    accounts.*
+    FROM vaults
+    JOIN accounts ON vaults.creator_Id = accounts.id
+    WHERE vaults.creator_Id = 67e32349d1583cd79fcfd0a4;

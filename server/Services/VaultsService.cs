@@ -4,11 +4,15 @@ namespace keepr.Services;
 
 public class VaultsService
 {
-  public VaultsService(VaultsRepository repository)
+  public VaultsService(VaultsRepository repository, VaultKeepersRepository vaultKeepersRepository, ProfileService profileService)
   {
     _repository = repository;
+    _vaultKeepersRepository = vaultKeepersRepository;
+    _profileService = profileService;
   }
   private readonly VaultsRepository _repository;
+  private readonly VaultKeepersRepository _vaultKeepersRepository;
+  private readonly ProfileService _profileService;
   internal Vault CreateVault(Vault vaultData)
   {
     Vault vault = _repository.CreateVault(vaultData);
@@ -71,5 +75,30 @@ public class VaultsService
     return vault.Name + " had been deleted!";
   }
 
+  internal List<Vault> GetVaultsByProfileId(string profileId, string userId)
+  {
+    Profiles profile = _profileService.GetProfileById(profileId);
+    List<Vault> vaults = _repository.GetVaultsByCreatorId(profileId);
+    List<Vault> filteredVaults = new List<Vault>();
+    //TODO private vaults help reviews shut down restaurant
+    // foreach (Vault vault in vaults)
+    // {
 
+    //   if (vault.IsPrivate == false || vault.CreatorId == userId)
+    //   {
+    //     filteredVaults.Add(vault);
+    //   }
+    //   else
+    //   {
+    //     bool isKeeper = _vaultKeepersRepository.IsKeeper(vault.Id, userId);
+    //     if (isKeeper)
+    //     {
+    //       filteredVaults.Add(vault);
+    //     }
+    //   }
+    // }
+
+
+    return vaults;
+  }
 }

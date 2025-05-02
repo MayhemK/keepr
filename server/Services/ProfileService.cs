@@ -8,7 +8,7 @@ public class ProfileService
     _repository = repository;
   }
 
-  internal Profiles GetProfileById(string profilesId, Profile userInfo)
+  internal Profiles GetProfileById(string profilesId)
   {
     Profiles profiles = _repository.GetProfileById(profilesId);
     return profiles;
