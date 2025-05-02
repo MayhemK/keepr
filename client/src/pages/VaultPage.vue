@@ -70,6 +70,8 @@ async function deleteVault() {
         <div class="col-6">
           <img :src="vault.img" alt="">
           <div class="fs-2 text-center marko-font">{{ vault.name }}</div>
+          <div>{{ vault.creator.name }}</div>
+          <div>{{ keeps.length }}</div>
           <div class="text-center fs-4">{{ vault.description }}</div>
 
           <div class="row justify-content-center mt-3">
